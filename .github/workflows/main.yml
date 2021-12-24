@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: 0 12 * * *
 jobs:
-  Bing-spider:
+  Download-Image:
     runs-on: ubuntu-latest
     steps:
       - name: 'Set up Go'

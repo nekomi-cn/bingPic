@@ -53,7 +53,6 @@ func loadFromBing() (image conf.BingImagesDoc, err error) {
 		return
 	}
 	err = json.Unmarshal(syncRespBodyBytes, &image)
-	log.Infof("%v", image)
 	return
 }
 
@@ -95,7 +94,7 @@ func DownImage() (err error) {
 	}
 	imgPath := conf.WriteToFile + time.Now().Format("2006-01-01") + ".jpg"
 	imgUrl := "https://www.bing.com" + loaded.Images[0].Url
-	log.Infof("开始下载，目标地址: %s", imgUrl)
+	log.Infof("开始下载，目标地址: %s", loaded.Images[0].Url)
 	res, err := http.Get(imgUrl)
 	if err != nil {
 		log.Errorf("%v", err)
