@@ -1,0 +1,45 @@
+name: 'Auto Get Images'
+
+on:
+  push:
+    branches: 
+      - master
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  Bing-spider:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Set up Go'
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.16.6
+      
+      - name: Checkout Out Code
+        uses: actions/checkout@v2
+
+      - name: 'Install dependencies'
+        run: go mod tidy
+
+      - name: 'Working'
+        timeout-minutes: 500
+        run: go run ./main.go
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git commit -m "✅ add a BingImage" -a
+
+      - name: 'Push changes'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
+
+      - name: 'Create a Release'
+        uses: elgohr/Github-Release-Action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          args: BingImage
