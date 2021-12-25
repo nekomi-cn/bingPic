@@ -92,7 +92,7 @@ func DownImage() (err error) {
 		log.Errorf("%v", err)
 		return
 	}
-	imgPath := conf.WriteToFile + time.Now().Format("2006-01-01") + ".jpg"
+	imgPath := conf.WriteToFile + time.Now().Format("2006-01-02") + ".jpg"
 	imgUrl := "https://www.bing.com" + loaded.Images[0].Url
 	log.Infof("开始下载，目标地址: %s", loaded.Images[0].Url)
 	res, err := http.Get(imgUrl)
