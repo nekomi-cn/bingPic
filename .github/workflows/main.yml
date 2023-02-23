@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Set up Go'
-        uses: actions/setup-go@v1
+        uses: actions/setup-go@v3
         with:
           go-version: 1.16.6
       
       - name: Checkout Out Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 'Install dependencies'
         run: go mod tidy
@@ -40,7 +40,7 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
 
       - name: 'Create a Release'
-        uses: elgohr/Github-Release-Action@master
+        uses: elgohr/Github-Release-Action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
